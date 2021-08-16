@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Application.Interfaces;
+﻿using AutoMapper;
+using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.ViewModels;
 using CleanArchitecture.Domain.Commands;
 using CleanArchitecture.Domain.Core.Bus;
@@ -15,22 +16,24 @@ namespace CleanArchitecture.Application.Services
     {
         private readonly ICategoryRepository _categoryRepo;
         private readonly IMediatorHandler _bus;
+        private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepo, IMediatorHandler bus)
+        public CategoryService(ICategoryRepository categoryRepo, IMediatorHandler bus, IMapper mapper)
         {
             _categoryRepo = categoryRepo;
             _bus = bus;
+            _mapper = mapper;
         }
 
         public void Create(CategoryViewModel categoryViewModel)
         {
-            CreateCategoryCommand createCategoryCommand = new(
-                    categoryViewModel.Name,
-                    categoryViewModel.Description,
-                    categoryViewModel.ImageUrl
-                );
+            //CreateCategoryCommand createCategoryCommand = new(
+            //        categoryViewModel.Name,
+            //        categoryViewModel.Description,
+            //        categoryViewModel.ImageUrl
+            //    );
 
-            _bus.SendCommand(createCategoryCommand);
+            _bus.SendCommand(_mapper.Map<CreateCategoryCommand>(categoryViewModel));
 
         }
 

@@ -1,3 +1,4 @@
+using CleanArchitecture.Api.Configurations;
 using CleanArchitecture.Infrastructure.Data.Context;
 using CleanArchitecture.Infrastructure.IoC;
 using MediatR;
@@ -37,6 +38,8 @@ namespace CleanArchitecture.Api
             services.AddControllers();
             RegisterServices(services);
             services.AddMediatR(typeof(Startup));
+
+            services.RegisterAutoMapper();
 
             services.AddSwaggerGen(c =>
             {
