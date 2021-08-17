@@ -1,2 +1,2 @@
-# Clean-Architecture-MS2
+# Clean-Architecture
 Overview of a Clean Architecture
